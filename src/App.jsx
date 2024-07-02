@@ -25,12 +25,12 @@ function App() {
 
       return {
         ...prevState,
+        selectedProject: undefined,
         project:[...prevState.projects, newProject]
       }
     })
   }
 
-  console.log(projectsState);
   let content;
 
   if(projectsState.selectedProject === null){
