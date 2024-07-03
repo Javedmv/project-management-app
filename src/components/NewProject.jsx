@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import Input from "./Input";
 import Modal from './Modal';
 
-function NewProject({onAdd}){
+function NewProject({onAdd, onCancel}){
     const modal = useRef()
 
     const titleRef = useRef();
@@ -11,29 +11,29 @@ function NewProject({onAdd}){
 
     function handleSave(){
         const enteredTitle = titleRef.current.value;
-        const enteredDescriptionRef = descriptionRef.current.value;
-        const enteredDueDateRef = dueDateRef.current.value;
+        const enteredDescription = descriptionRef.current.value;
+        const enteredDueDate = dueDateRef.current.value;
 
-        if(enteredTitle.trim() === '' || enteredDescriptionRef.trim() === '' || enteredDueDateRef.trim() === ''){
+        if(enteredTitle.trim() === '' || enteredDescription.trim() === '' || enteredDueDate.trim() === ''){
             modal.current.open()
             return
         }
 
-        onAdd({title: enteredTitle, discription: enteredDescriptionRef, dueDate:enteredDueDateRef});
+        onAdd({title: enteredTitle, description: enteredDescription, dueDate:enteredDueDate});
     }
 
     return(
         <>
-        <Modal ref={modal} buttonCaption="Close">
-            <h2>invalid input</h2>
-            <p>Oops... looks like you forgot to enter a value.</p>
-            <p>please make sure you provide a valid value for every input field</p>
+        <Modal ref={modal} buttonCaption="Okay">
+            <h2 className='text-xl font-bold text-stone-700 my-4'>invalid input</h2>
+            <p className='text-stone-600 mb-4'>Oops... looks like you forgot to enter a value.</p>
+            <p className='text-stone-600 mb-4'>please make sure you provide a valid value for every input field</p>
         </Modal>
 
         <div className="w-[35rem] mt-16">
             <menu className="flex item-center justify-end gap-4 my-4">
                 <li>
-                    <button className="px-6 py-2 text-stone-800 hover:text-stone-950">Cancel</button>
+                    <button className="px-6 py-2 text-stone-800 hover:text-stone-950" onClick={onCancel}>Cancel</button>
                 </li>
                 <li>
                     <button className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950" onClick={handleSave}>Save</button>
