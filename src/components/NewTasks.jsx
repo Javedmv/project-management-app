@@ -1,0 +1,27 @@
+import React, { useState } from 'react'
+
+const NewTasks = ({onAddTask}) => {
+    const [enteredTask, setEnteredTask] = useState("");
+
+    function handleChange(event){
+        setEnteredTask(event.target.value);
+    }
+
+    function handleClick(event){
+        event.preventDefault(); 
+        if(enteredTask.trim() === ''){
+            return;
+        }
+        onAddTask(enteredTask)
+        setEnteredTask('');
+    }
+
+  return (
+    <div className='flex items-center gap-4'>
+      <input type="text" className='w-64 px-2 py-1 rounded-sm bg-stone-200' onChange={handleChange} value={enteredTask}/>
+      <button className='text-stone-800 mb-4' onClick={handleClick}>Add Task</button>
+    </div>
+  )
+}
+
+export default NewTasks
